@@ -28,6 +28,7 @@ public class InvoiceController {
             @RequestBody Invoice invoice
     ) {
 
+        // SAVE INVOICE
         Invoice savedInvoice =
                 invoiceService.createInvoice(invoice);
 
@@ -35,17 +36,36 @@ public class InvoiceController {
         byte[] pdfBytes =
                 pdfService.generatePdf(savedInvoice);
 
-        // ✅ SEND MAIL ONLY IF EMAIL EXISTS
+        // SEND EMAIL ONLY IF EMAIL EXISTS
         if (savedInvoice.getCustomerEmail() != null
                 &&
                 !savedInvoice.getCustomerEmail().trim().isEmpty()) {
 
-            emailService.sendInvoiceEmail(
-                    savedInvoice,
-                    pdfBytes
-            );
+            try {
+
+                emailService.sendInvoiceEmail(
+                        savedInvoice,
+                        pdfBytes
+                );
+
+                System.out.println(
+                        "Invoice email sent successfully"
+                );
+
+            } catch (Exception e) {
+
+                // IMPORTANT:
+                // EVEN IF EMAIL FAILS,
+                // BILL GENERATION SHOULD CONTINUE
+
+                System.out.println(
+                        "Email sending failed : "
+                                + e.getMessage()
+                );
+            }
         }
 
+        // RETURN SAVED INVOICE
         return savedInvoice;
     }
 
