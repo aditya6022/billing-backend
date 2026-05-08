@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8"/>
+
+    <style>
+
+        body {
+
+            font-family: "NotoSans", Arial, sans-serif;
+            margin: 0;
+            padding: 8px;
+            color: #2d2d2d;
+            background: #ffffff;
+        }
+
+        .invoice-container {
+
+            border: 1px solid #dcdcdc;
+            border-radius: 12px;
+            padding: 14px;
+            width: 72%;
+            margin: auto;
+        }
+
+        /* HEADER */
+
+        .header-table {
+
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 14px;
+        }
+
+        .header-table td {
+
+            border: none;
+            vertical-align: top;
+        }
+
+        /* LEFT */
+
+        .invoice-title {
+
+            font-size: 24px;
+            font-weight: bold;
+            color: #184a8c;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .company {
+
+            font-size: 18px;
+            font-weight: bold;
+            color: #184a8c;
+            margin-bottom: 10px;
+        }
+
+        .address {
+
+            font-size: 12px;
+            line-height: 20px;
+            color: #555;
+        }
+
+        /* RIGHT */
+
+        .details-box {
+
+            border: 1px solid #d9d9d9;
+            border-radius: 8px;
+            padding: 12px;
+            background: #f8fbff;
+        }
+
+        .invoice-details {
+
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+        }
+
+        .invoice-details td {
+
+            border: none;
+            padding: 4px 0;
+            font-size: 12px;
+        }
+
+        .label {
+
+            color: #184a8c;
+            font-weight: bold;
+            width: 38%;
+            vertical-align: top;
+        }
+
+        .value {
+
+            color: #333;
+            line-height: 18px;
+        }
+
+        .customer-title {
+
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+            color: #184a8c;
+            margin-bottom: 10px;
+            margin-top: 6px;
+        }
+
+        /* LINE */
+
+        .top-line {
+
+            height: 4px;
+            background: linear-gradient(to right, #184a8c, #4f8edc);
+            border-radius: 5px;
+            margin-top: 8px;
+            margin-bottom: 14px;
+        }
+
+        /* ITEM TABLE */
+
+        .item-table {
+
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 8px;
+        }
+
+        .item-table th {
+
+            background: #184a8c;
+            color: white;
+            padding: 6px;
+            font-size: 12px;
+            border: 1px solid #d6d6d6;
+        }
+
+        .item-table td {
+
+            padding: 6px;
+            border: 1px solid #d6d6d6;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .item-table tr:nth-child(even) {
+
+            background: #f8fbff;
+        }
+
+        .item-desc {
+
+            text-align: left !important;
+        }
+
+        /* TOTAL */
+
+        .totals {
+
+            width: 220px;
+            margin-left: auto;
+            margin-top: 14px;
+            border-collapse: collapse;
+        }
+
+        .totals td {
+
+            border: none;
+            padding: 5px;
+            font-size: 12px;
+        }
+
+        .grand-total {
+
+            background: #184a8c;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* FOOTER */
+
+        .footer-box {
+
+            margin-top: 18px;
+            border-top: 1px dashed #999;
+            padding-top: 12px;
+        }
+
+        .terms {
+
+            font-size: 11px;
+            color: #555;
+            line-height: 18px;
+            float: left;
+        }
+
+        .signature {
+
+            float: right;
+            text-align: center;
+        }
+
+        .signature img {
+
+            width: 90px;
+        }
+
+        .sign-name {
+
+            font-size: 11px;
+            color: #444;
+            margin-top: 4px;
+        }
+
+        .bottom-line {
+
+            clear: both;
+            margin-top: 55px;
+            height: 4px;
+            background: linear-gradient(to right, #184a8c, #4f8edc);
+            border-radius: 5px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="invoice-container">
+
+    <!-- HEADER -->
+
+    <table class="header-table">
+
+        <tr>
+
+            <!-- LEFT -->
+
+            <td style="width:50%; padding-right:14px;">
+
+                <div class="invoice-title">
+                    INVOICE
+                </div>
+
+                <div class="company">
+                    VIVEK TRADERS
+                </div>
+
+                <div class="address">
+
+                    Near to PNB ATM<br/>
+
+                    Bathua Bazar, Gopalganj<br/>
+
+                    Mob: 8651194557
+
+                </div>
+
+            </td>
+
+            <!-- RIGHT -->
+
+            <td style="width:50%;">
+
+                <div class="details-box">
+
+                    <table class="invoice-details">
+
+                        <tr>
+
+                            <td class="label">
+                                Invoice No:
+                            </td>
+
+                            <td class="value">
+                                {{invoiceNumber}}
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td class="label">
+                                Date:
+                            </td>
+
+                            <td class="value">
+                                {{date}}
+                            </td>
+
+                        </tr>
+
+                    </table>
+
+                    <div class="customer-title">
+                        CUSTOMER DETAILS
+                    </div>
+
+                    <table class="invoice-details">
+
+                        <tr>
+
+                            <td class="label">
+                                Name:
+                            </td>
+
+                            <td class="value">
+                                {{customerName}}
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td class="label">
+                                Address:
+                            </td>
+
+                            <td class="value">
+                                {{customerAddress}}
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td class="label">
+                                Email:
+                            </td>
+
+                            <td class="value">
+                                {{customerEmail}}
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td class="label">
+                                Mobile:
+                            </td>
+
+                            <td class="value">
+                                {{customerMobile}}
+                            </td>
+
+                        </tr>
+
+                    </table>
+
+                </div>
+
+            </td>
+
+        </tr>
+
+    </table>
+
+    <div class="top-line"></div>
+
+    <!-- ITEMS -->
+
+    <table class="item-table">
+
+        <tr>
+
+            <th>Sr No</th>
+
+            <th>Item Description</th>
+
+            <th>Price</th>
+
+            <th>Quantity</th>
+
+            <th>Total</th>
+
+        </tr>
+
+        {{items}}
+
+    </table>
+
+    <!-- TOTAL -->
+
+    <table class="totals">
+
+        <tr>
+
+            <td>
+                Sub Total
+            </td>
+
+            <td style="text-align:right;">
+                ₹ {{total}}
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <td>
+                Tax
+            </td>
+
+            <td style="text-align:right;">
+                ₹ 0
+            </td>
+
+        </tr>
+
+        <tr class="grand-total">
+
+            <td>
+                Grand Total
+            </td>
+
+            <td style="text-align:right;">
+                ₹ {{total}}
+            </td>
+
+        </tr>
+
+    </table>
+
+    <!-- FOOTER -->
+
+    <div class="footer-box">
+
+        <div class="terms">
+
+            <b>Terms &amp; Conditions:</b><br/>
+
+            1. No return after purchase<br/>
+
+            2. Goods once sold not taken back
+
+        </div>
+
+        <div class="signature">
+
+            <img src="signature.png"/>
+
+            <div class="sign-name">
+                Authorized Signature
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="bottom-line"></div>
+
+</div>
+
+</body>
+</html>
